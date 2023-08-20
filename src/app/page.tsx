@@ -6,7 +6,7 @@ type Props = {}
 const Home = ({}: Props) => {
   const TageName = Chatui; 
   const footerString:any = {
-    data:0,
+    data:"0",
     footerdata:"저쩌구"
   }
   if(TageName.name == "chatui"){
