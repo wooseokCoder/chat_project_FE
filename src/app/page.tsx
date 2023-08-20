@@ -1,5 +1,5 @@
 import React from 'react'
-import Chatui from './component/chatui';
+import Chatui from '../component/chatui';
 
 type Props = {}
 
