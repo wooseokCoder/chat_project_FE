@@ -3,6 +3,7 @@
 import chatCore from "../core/chat-core";
 import type{responseProps} from "../core/chat-core";
 import { useState } from "react";
+import {alert, confirm} from "../core/alert";
 
 interface footerData { 
   data:string,
@@ -25,7 +26,11 @@ const Chatui = ({data}:{data:footerData}) =>{
   
   const axiosConnection = () =>{chatCore.postAxios("/hello133333",{},(result:any)=>{
     if(result){
+      alert("요청에 성공하였습니다");
       setChatData(result);
+      //confirm("요청 후 confirm",()=>{
+      //  debugger
+      //});
     }
     //if(response.data && response.data.length > 1){
       // alert라이브러리가 없어 호출이안됨
