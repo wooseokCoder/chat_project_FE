@@ -4,6 +4,8 @@ export interface responseProps {
     resultCode : string,
     data? : any
 }
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "http://localhost:8080";
 
 const chatCore = {
     getAxios : (url:string,param:any,callback:Function, error?:Function) =>{

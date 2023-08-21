@@ -23,7 +23,7 @@ const Chatui = ({data}:{data:footerData}) =>{
     resultCode : ""
   });
   
-  const axiosConnection = () =>{chatCore.postAxios(process.env.NEXT_PUBLIC_API_URL + "/hello133333",{},(result:any)=>{
+  const axiosConnection = () =>{chatCore.postAxios("/hello133333",{},(result:any)=>{
     if(result){
       setChatData(result);
     }
