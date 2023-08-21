@@ -1,8 +1,8 @@
+
 import axios from "axios";
 export interface responseProps {
-    code : string,
-    data? : any,
-    errMsg : string,
+    resultCode : string,
+    data? : any
 }
 
 const chatCore = {
@@ -21,13 +21,13 @@ const chatCore = {
             method : "post",
             data : param
         })
-        .then((response) => {callback(response)})
+        .then((response) => {callback({resultCode : response.status,chat:response.data});})
         .catch((err) =>{
                         //alert("axios통신 중 오류가 발생했습니다.");
-                        if(error){
-                            error(err)
-                        }
-                        })
+            if(err && error){
+                error(err)
+            }
+        })
     },
     putAxios: (url:string,param:any,callback:Function, error?:Function) =>{
         axios(url,{

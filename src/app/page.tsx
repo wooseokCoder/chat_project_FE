@@ -9,12 +9,10 @@ const Home = ({}: Props) => {
     data:"0",
     footerdata:"저쩌구"
   }
-  if(TageName.name == "chatui"){
     footerString.data = typeof footerString.data =="string" ? footerString.data : "문자열이 아니었음"
     return (<div>
         <TageName data={footerString}></TageName>
         Home</div>) 
-  }
 }
  
 export default Home
