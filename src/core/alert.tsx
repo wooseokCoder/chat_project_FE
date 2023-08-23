@@ -11,7 +11,7 @@ const alert = (alertCntn:string) =>{
     }
 
 
-const confirm = (confirmCntn:string, callback:Function) =>{
+const confirm = (confirmCntn:string, trueCallback:Function, falseCallback?:Function) =>{
         Swal.fire({
             title: "Chat traveling",
             html : confirmCntn,
@@ -20,8 +20,11 @@ const confirm = (confirmCntn:string, callback:Function) =>{
             cancelButtonText : "취소"
         }).then((result) =>{
             if(result.value){
-                callback();
+                trueCallback();
+            }else if(result.dismiss && typeof result.dismiss == "string" && result.dismiss == "cancel" && falseCallback){
+                falseCallback()
             }
+            return false;
         });
     }
 

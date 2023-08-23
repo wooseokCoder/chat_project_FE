@@ -24,18 +24,11 @@ const Chatui = ({data}:{data:footerData}) =>{
     resultCode : ""
   });
   
-  const axiosConnection = () =>{chatCore.postAxios("/hello133333",{},(result:any)=>{
+  const axiosConnection = () =>{chatCore.postAxios("/hello133333",{},(result:responseChat)=>{
     if(result){
       alert("요청에 성공하였습니다");
       setChatData(result);
-      //confirm("요청 후 confirm",()=>{
-      //  debugger
-      //});
     }
-    //if(response.data && response.data.length > 1){
-      // alert라이브러리가 없어 호출이안됨
-      //alert("데이터 호출에 성공하였습니다.");
-    //}
   },(error:responseChat)=>{
     if(error){
       setChatData(error);
@@ -44,7 +37,7 @@ const Chatui = ({data}:{data:footerData}) =>{
   })
   }
 
-    return (<div><h1>{data.data}</h1><span onClick={() =>axiosConnection()}>{chatData.chat[0].sendChat}11</span>
+    return (<div><h1>{data.data}</h1><button onClick={() =>confirm("요청 confirm",()=>{axiosConnection()},()=>{alert("취소되었습니다.")})}>{chatData.chat[0].sendChat}api요청</button>
               {
                 data.footerdata == "저쩌구"?
                   <span>{data.footerdata}{process.env.NEXT_PUBLIC_API_URL}</span>

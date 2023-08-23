@@ -1,0 +1,186 @@
+html {
+    border-radius: 1rem;
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    overflow: hidden;
+  }
+  
+.card {
+    width: 40%;
+    height: 700px;
+    margin: 50px auto;
+    background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(150, 150, 150, 0.1));
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+  }
+  .chartForm {
+    width: 90%;
+    height: 700px;
+    margin: 50px auto;
+  }
+  
+  .tools {
+    display: flex;
+    align-items: center;
+    padding: 9px;
+  }
+  
+  .circle {
+    padding: 0 4px;
+  }
+  
+  .box {
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+  }
+  
+  .red {
+    background-color: #ff605c;
+  }
+  
+  .yellow {
+    background-color: #ffbd44;
+  }
+  
+  .green {
+    background-color: #00ca4e;
+  }
+
+  .contents{
+    position: relative;
+  }
+
+  .chartDiv {
+    width: 45%;
+    height: 45%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .input {
+    border: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    transition: 0.3s;
+    bottom: 0;
+    position: absolute;
+    width: 94%;
+   }
+   
+   .input:focus {
+    outline-color: #e8e8e8;
+    background: #e8e8e8;
+    transition: 0.3s;
+   }
+
+   button {
+    width: 150px;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 38px;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    color: #FFFFFF;
+    background-color: #1DC9A0;
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: all 0.15s linear;
+    margin-right: 10px;
+   }
+   
+   button:hover {
+    background-color: rgba(29, 201, 160, 0.08);
+    border-color: #1DC9A0;
+    color: #1DC9A0;
+    transform: translateY(-5px) scale(1.05);
+   }
+   
+   button:active {
+    background-color: transparent;
+    border-color: #1DC9A0;
+    color: #1DC9A0;
+    transform: translateY(5px) scale(0.95);
+   }
+   
+   button:disabled {
+    background-color: rgba(255, 255, 255, 0.16);
+    color: #8E8E93;
+    border-color: #8E8E93;
+   }
+   .buttonDiv{
+    text-align: center;
+    padding-top : 30px;
+   }
+   .chatForm {
+    padding-left: 60px;
+    padding-right: 60px;
+    overflow: auto;
+    height: 367px;
+   }
+   .chatForm::-webkit-scrollbar {
+    width: 10px;
+  }
+  .chatForm::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  .chatForm::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+
+   .chatBot-bubble {
+    background: #e5e52a;
+    border-radius: .5em;
+    margin-top:10px;
+    padding: 10px;
+    width: 60%;
+    display: inline-block;
+  }
+  
+  .chatBot-bubble:after {
+    content: '';
+  float:left;
+	border: 1.313em solid transparent;
+	border-right-color: #e5e52a;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -0.656em;
+	margin-left: -1.312em;
+  }
+  .user-bubble {
+    background: #00bd5b;
+    border-radius: .5em;
+    margin-top: 10px;
+    padding : 10px;
+    float: right;
+    width: 60%;
+    display: inline-block;
+  }
+  
+  .user-bubble:after {
+    content: '';
+    float:right;
+    border: 1.313em solid transparent;
+    border-left-color: #00bd5b;
+    border-right: 0;
+    border-top: 0;
+    margin-top: -0.656em;
+    margin-right: -1.312em;
+  }
+  
