@@ -9,14 +9,6 @@ const ChatMain = () =>{
         <div className = "contents">
         <ChatPhone></ChatPhone>
         </div>
-        <div className = "contents">
-          <div className ="chartForm">
-            <div className ="chartDiv"> <h1>차트 들어갈 곳</h1></div>
-            <div className ="chartDiv"> <h1>차트 들어갈 곳</h1></div>
-            <div className ="chartDiv"> <h1>차트 들어갈 곳</h1></div>
-            <div className ="chartDiv"> <h1>차트 들어갈 곳</h1></div>
-          </div>
-        </div>
     </div>
     )
 }

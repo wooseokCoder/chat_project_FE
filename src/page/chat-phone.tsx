@@ -2,28 +2,49 @@
 
 import chatCore from "../core/chat-core";
 import type{responseProps} from "../core/chat-core";
-import { KeyboardEvent, KeyboardEventHandler, useState } from "react";
+import { KeyboardEvent, useState, useRef, useEffect } from "react";
 import {alert, confirm} from "../core/alert";
 import "../css/main.css";
+import ChatLoading from "@/core/loading";
 
 interface responseChat extends responseProps{
-    chat : chatData[]
+    chat : chatData
 }
 interface chatData {
-    sendChat: string,
-    receiveChat : string,
+    chatAsw: string,
+    userAsw : string,
 }
 
+const loadingPosition = {
+    position: "relative",
+    bottom: "72px",
+    left: "-1px",
+};
+
 const ChatPhone = () =>{
+    
+    const messageBoxBottomRef = useRef<null | HTMLDivElement>(null);
+    const progress = useRef<null | HTMLDivElement>(null);
+    
     const [chatList,setChatList] = useState([
             {chatAsw : "안녕하세요.",
             userAsw : "안녕 Chat",
             }
-        ])
-    const [chatData,setChatData] = useState<responseChat>({
-        chat : [{sendChat:"",receiveChat:""}],
-        resultCode : ""
-      });
+        ]);
+
+    useEffect(() =>{
+        scrollToBottom();
+    }, [chatList]);
+
+    const scrollToBottom = () => {
+        messageBoxBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const progressCk = (ck:boolean) =>{
+      if(progress.current){
+        progress.current.style.display = ck ? "" : "none";
+      }
+    }
 
     const axiosConnection = (event: KeyboardEvent<HTMLInputElement>) =>{
         
@@ -31,19 +52,17 @@ const ChatPhone = () =>{
             return false;
         }
         let target = event.currentTarget;
-        let chating = {
-            chatAsw : "",
-            userAsw : target.value as string
-        }
-        chatCore.postAxios("/hello133333",{},(result:responseChat)=>{
+        progressCk(true);
+        chatCore.postAxios("/hello133333",{userAsw:target.value},(result:responseChat)=>{
             if(result){
-              chating.chatAsw = result.chat[0].receiveChat;
-              setChatList([...chatList, chating]);
+              console.log("dlrjanjsi")
+              setChatList([...chatList, result.chat]);
               target.value = "";
+              progressCk(false);
             }
         },(error:responseChat)=>{
             if(error){
-              setChatData(error);
+                alert("chat과의 통신에 실패했습니다.");
             }
           })
         }
@@ -76,13 +95,17 @@ const ChatPhone = () =>{
         </div>
         <div className="chatForm">
           {
-            chatList.map(item =>{
-                return <><div className="user-bubble">{item.userAsw}</div>
-                        <div className="chatBot-bubble">{item.chatAsw}</div></>;
+            chatList.map((item,indx) =>{
+                return <div key={indx}><div className="user-bubble">{item.userAsw}</div>
+                        <div className="chatBot-bubble">{item.chatAsw}</div></div>;
             })
           }
+        <span ref={messageBoxBottomRef}></span>
         </div>
-          <input onKeyDown={(Event)=>{axiosConnection(Event)}}type="text" name="text" className="input" placeholder="Type here..."/>
+        <div ref={progress} style={{display:"none"}}>
+            <ChatLoading ldPosition={loadingPosition}></ChatLoading>
+        </div>
+        <input onKeyDown={(Event)=>{axiosConnection(Event)}}type="text" name="text" className="input" placeholder="Type here..."/>
         </div>
       </div>
     )

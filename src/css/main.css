@@ -151,6 +151,7 @@ html {
     padding: 10px;
     width: 60%;
     display: inline-block;
+    margin-bottom: 8px;
   }
   
   .chatBot-bubble:after {
@@ -171,6 +172,7 @@ html {
     float: right;
     width: 60%;
     display: inline-block;
+    margin-bottom: 8px;
   }
   
   .user-bubble:after {

@@ -1,11 +1,17 @@
 
-import axios from "axios";
+import axios, { HeadersDefaults } from "axios";
 export interface responseProps {
     resultCode : string,
     data? : any
 }
+
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.headers.post = {
+    "Content-Type": "application/json"
+};
+
+
 
 const chatCore = {
     getAxios : (url:string,param:any,callback:Function, error?:Function) =>{
@@ -21,7 +27,7 @@ const chatCore = {
     postAxios : (url:string,param:any,callback:Function, error?:Function) =>{
         axios(url,{
             method : "post",
-            data : param
+            data : JSON.stringify(param),
         })
         .then((response) => {callback({resultCode : response.status,chat:response.data});})
         .catch((err) =>{
