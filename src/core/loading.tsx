@@ -1,6 +1,6 @@
 import { Transition } from "framer";
 import { motion } from "framer-motion";
-import {useState,useEffect} from "react";
+import {useState,useEffect, CSSProperties} from "react";
 
 interface loadingPoisition {
     position:string,
@@ -66,10 +66,9 @@ const divStype = {
 const ChatLoading = ({ldPosition}:{ldPosition?:loadingPoisition}) => {
 
     return (
-      <div style={{zIndex:"1",position:"relative"}}>
+      <div style={Object.assign({zIndex:"1",position:"relative"}, ldPosition) as CSSProperties}>
         <div
-            style={Object.assign(divStype,ldPosition) as React.CSSProperties}
-        >
+            style={divStype}>
             <motion.div
             style={LoadingContainer}
             variants={ContainerVariants}

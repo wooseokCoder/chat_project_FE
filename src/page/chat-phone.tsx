@@ -47,15 +47,20 @@ const ChatPhone = () =>{
     }
 
     const axiosConnection = (event: KeyboardEvent<HTMLInputElement>) =>{
-        
-        if(!event || event && event.code != "Enter"){
-            return false;
-        }
-        let target = event.currentTarget;
+      let target = event.currentTarget;
+
+      if(!event || event && event.code != "Enter" || event.keyCode != 13){
+          return false;
+      }
+
+      if(!target.value){
+        event.preventDefault();
+        alert("질문을 입력해주세요");
+        return ;
+      }
         progressCk(true);
         chatCore.postAxios("/hello133333",{userAsw:target.value},(result:responseChat)=>{
             if(result){
-              console.log("dlrjanjsi")
               setChatList([...chatList, result.chat]);
               target.value = "";
               progressCk(false);
@@ -64,8 +69,8 @@ const ChatPhone = () =>{
             if(error){
                 alert("chat과의 통신에 실패했습니다.");
             }
-          })
-        }
+        })
+    }
     
     return (
         <div className="card">
