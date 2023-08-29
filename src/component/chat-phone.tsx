@@ -8,8 +8,9 @@ import "../css/main.css";
 import ChatLoading from "@/core/loading";
 
 interface responseChat extends responseProps {
-  chat: chatData;
+  data: chatData;
 }
+
 interface chatData {
   chatAsw: string;
   userAsw: string;
@@ -25,9 +26,7 @@ const ChatPhone = () => {
   const messageBoxBottomRef = useRef<null | HTMLDivElement>(null);
   const progress = useRef<null | HTMLDivElement>(null);
 
-  const [chatList, setChatList] = useState([
-    { chatAsw: "안녕하세요.", userAsw: "안녕 Chat" },
-  ]);
+  const [chatList, setChatList] = useState<chatData[]>([{ chatAsw: "안녕하세요.", userAsw: "안녕 Chat" }]);
 
   useEffect(() => {
     scrollToBottom();
@@ -43,7 +42,7 @@ const ChatPhone = () => {
     }
   };
 
-  const axiosConnection = (event: KeyboardEvent<HTMLInputElement>) => {
+  const axiosConnection = (event: KeyboardEvent<HTMLInputElement>)=>{
     let target = event.currentTarget;
 
     if (!event || (event && event.code != "Enter") || event.keyCode != 13) {
@@ -53,18 +52,19 @@ const ChatPhone = () => {
     if (!target.value) {
       event.preventDefault();
       alert("질문을 입력해주세요");
-      return;
+      return false;
     }
-    progressCk(true);
-    chatCore.postAxios("/hello133333", { userAsw: target.value },(result: responseChat) => {
+    progressCk(true); 
+    chatCore.putAxios("/hello133333", { userAsw: target.value },(result: responseChat) => {
         if (result) {
-          setChatList([...chatList, result.chat]);
+          setChatList([...chatList, result.data]);
           target.value = "";
           progressCk(false);
         }
       },(error: responseChat) => {
         if (error) {
           alert("chat과의 통신에 실패했습니다.");
+          progressCk(false);
         }
       }
     );
@@ -123,5 +123,6 @@ const ChatPhone = () => {
     </div>
   );
 };
+
 
 export default ChatPhone;
