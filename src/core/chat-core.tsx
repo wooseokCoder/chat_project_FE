@@ -25,11 +25,10 @@ const chatCore = {
         axios.get(url)
         .then((response) => {callback(response)})
         .catch((err) =>{
-                        //alert("axios통신 중 오류가 발생했습니다.");
-                        if(error){
-                            error(err)
-                        }
-                        })
+            if(error){
+                error(err)
+            }
+        })
     },
     postAxios : (url:string,param:any,callback:Function, error?:Function) =>{
         axios.post(url,JSON.stringify(param))
@@ -43,7 +42,6 @@ const chatCore = {
             }
         })
         .catch((err) =>{
-                        //alert("axios통신 중 오류가 발생했습니다.");
             if(err && error){
                 error(err)
             }else{
@@ -88,8 +86,65 @@ const chatCore = {
                 alert("axios 통신에 실패하였습니다");
             }
         })
-    }
-
+    },
+    asyncPostAxois:async (url:string,param:any,callback:Function, error?:Function) =>{
+        await axios.post(url,JSON.stringify(param))
+        .then((response) => {
+            if(response.status == 200){
+                callback({resultCode : response.status,data:response.data})
+            }else if(error){
+                error(response);
+            }else{
+                alert("axios 통신에 실패하였습니다");
+            }
+        })
+        .catch((err) =>{
+                        //alert("axios통신 중 오류가 발생했습니다.");
+            if(err && error){
+                error(err)
+            }else{
+                alert("axios 통신에 실패하였습니다");
+            }
+        })
+    },
+    asyncPutAxios: async (url:string,param:any,callback:Function, error?:Function) =>{
+        await axios.put(url,JSON.stringify(param))
+        .then((response) => {
+            if(response.status == 200){
+                callback({resultCode : response.status,data:response.data})
+            }else if(error){
+                error(response);
+            }else{
+                alert("axios 통신에 실패하였습니다");
+            }
+        })
+        .catch((err) =>{
+            if(error){
+                 error(err)
+            }else{
+                alert("axios 통신에 실패하였습니다");
+            }
+        })
+    },
+    asyncDeleteAxios:async (url:string,param:any,callback:Function, error?:Function) =>{
+        await axios.delete(url,{data:JSON.stringify(param)})
+        .then((response) => {
+            if(response.status == 200){
+                callback({resultCode : response.status,data:response.data})
+            }else if(error){
+                error(response);
+            }else{
+                alert("axios 통신에 실패하였습니다");
+            }
+        })
+        .catch((err) =>{
+            if(error){
+                 error(err)
+            }else{
+                alert("axios 통신에 실패하였습니다");
+            }
+        })
+    },
 }
 
 export default chatCore;
