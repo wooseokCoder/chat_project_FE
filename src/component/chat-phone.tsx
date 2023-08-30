@@ -3,7 +3,7 @@
 import chatCore from "../core/chat-core";
 import type { responseProps } from "../core/chat-core";
 import { KeyboardEvent, useState, useRef, useEffect } from "react";
-import { alert, confirm } from "../core/alert";
+import { alert } from "../core/alert";
 import "../css/main.css";
 import ChatLoading from "@/core/loading";
 
@@ -41,6 +41,8 @@ const ChatPhone = () => {
       progress.current.style.display = ck ? "" : "none";
     }
   };
+
+
 
   const axiosConnection = (event: KeyboardEvent<HTMLInputElement>)=>{
     let target = event.currentTarget;
@@ -120,6 +122,7 @@ const ChatPhone = () => {
           placeholder="Type here..."
         />
       </div>
+      
     </div>
   );
 };

@@ -18,7 +18,21 @@ axios.defaults.headers.delete = {
     "Content-Type": "application/json"
 };
 
-
+const resultCheck = (response:any,callback:Function, error?:Function) =>{
+    if(response.status == 200){
+        callback({resultCode : response.status,data:response.data})
+    }else if(error){
+        error(response);
+    }else{
+        alert("axios 통신에 실패하였습니다");
+    }
+}
+const sessionCheck = (url:string)=>{
+    if(url != "/login"){
+        return window.sessionStorage.getItem("sessionYn") != "Y";
+    }
+    return false;
+}
 
 const chatCore = {
     getAxios :(url:string,param:any,callback:Function, error?:Function) =>{
@@ -31,15 +45,13 @@ const chatCore = {
         })
     },
     postAxios : (url:string,param:any,callback:Function, error?:Function) =>{
+        if(sessionCheck(url)){
+            alert("세션이 없습니다. 로그인 후 이용해주세요.");
+            return false;
+        }
         axios.post(url,JSON.stringify(param))
         .then((response) => {
-            if(response.status == 200){
-                callback({resultCode : response.status,data:response.data})
-            }else if(error){
-                error(response);
-            }else{
-                alert("axios 통신에 실패하였습니다");
-            }
+            resultCheck(response,callback,error);
         })
         .catch((err) =>{
             if(err && error){
@@ -50,15 +62,13 @@ const chatCore = {
         })
     },
     putAxios: (url:string,param:any,callback:Function, error?:Function) =>{
+        if(sessionCheck(url)){
+            alert("세션이 없습니다. 로그인 후 이용해주세요.");
+            return false;
+        }
         axios.put(url,JSON.stringify(param))
         .then((response) => {
-            if(response.status == 200){
-                callback({resultCode : response.status,data:response.data})
-            }else if(error){
-                error(response);
-            }else{
-                alert("axios 통신에 실패하였습니다");
-            }
+            resultCheck(response,callback,error);
         })
         .catch((err) =>{
             if(error){
@@ -69,15 +79,13 @@ const chatCore = {
         })
     },
     deleteAxios:(url:string,param:any,callback:Function, error?:Function) =>{
+        if(sessionCheck(url)){
+            alert("세션이 없습니다. 로그인 후 이용해주세요.");
+            return false;
+        }
         axios.delete(url,{data:JSON.stringify(param)})
         .then((response) => {
-            if(response.status == 200){
-                callback({resultCode : response.status,data:response.data})
-            }else if(error){
-                error(response);
-            }else{
-                alert("axios 통신에 실패하였습니다");
-            }
+            resultCheck(response,callback,error);
         })
         .catch((err) =>{
             if(error){
@@ -88,15 +96,13 @@ const chatCore = {
         })
     },
     asyncPostAxois:async (url:string,param:any,callback:Function, error?:Function) =>{
+        if(sessionCheck(url)){
+            alert("세션이 없습니다. 로그인 후 이용해주세요.");
+            return false;
+        }
         await axios.post(url,JSON.stringify(param))
         .then((response) => {
-            if(response.status == 200){
-                callback({resultCode : response.status,data:response.data})
-            }else if(error){
-                error(response);
-            }else{
-                alert("axios 통신에 실패하였습니다");
-            }
+            resultCheck(response,callback,error);
         })
         .catch((err) =>{
                         //alert("axios통신 중 오류가 발생했습니다.");
@@ -108,15 +114,13 @@ const chatCore = {
         })
     },
     asyncPutAxios: async (url:string,param:any,callback:Function, error?:Function) =>{
+        if(sessionCheck(url)){
+            alert("세션이 없습니다. 로그인 후 이용해주세요.");
+            return false;
+        }
         await axios.put(url,JSON.stringify(param))
         .then((response) => {
-            if(response.status == 200){
-                callback({resultCode : response.status,data:response.data})
-            }else if(error){
-                error(response);
-            }else{
-                alert("axios 통신에 실패하였습니다");
-            }
+            resultCheck(response,callback,error);
         })
         .catch((err) =>{
             if(error){
@@ -127,15 +131,13 @@ const chatCore = {
         })
     },
     asyncDeleteAxios:async (url:string,param:any,callback:Function, error?:Function) =>{
+        if(sessionCheck(url)){
+            alert("세션이 없습니다. 로그인 후 이용해주세요.");
+            return false;
+        }
         await axios.delete(url,{data:JSON.stringify(param)})
         .then((response) => {
-            if(response.status == 200){
-                callback({resultCode : response.status,data:response.data})
-            }else if(error){
-                error(response);
-            }else{
-                alert("axios 통신에 실패하였습니다");
-            }
+            resultCheck(response,callback,error);
         })
         .catch((err) =>{
             if(error){
