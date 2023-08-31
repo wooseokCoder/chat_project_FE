@@ -8,18 +8,24 @@ export interface responseProps {
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://localhost:8080";
-axios.defaults.headers.post = {
-    "Content-Type": "application/json"
-};
-axios.defaults.headers.put = {
-    "Content-Type": "application/json"
-};
-axios.defaults.headers.delete = { 
-    "Content-Type": "application/json"
-};
 axios.defaults.validateStatus= (status) => {
     return status == 200;
 } 
+
+const headers = {
+    headers : {
+        "Content-Type": "application/json"
+    }
+}
+
+const checkRequest = (url:string) =>{
+    if(url != "/login" && window.sessionStorage.getItem("sessionYn") != "Y"){
+        event?.preventDefault();
+        alert("세션이 없습니다. 로그인 후 이용해주세요");
+        return true;
+    }
+    return false;
+}
 
 const axiosResult = (result:Promise<AxiosResponse<any, any>>, callback:Function, error?:Function)=>{
     result.then((response: AxiosResponse<any, any>) => {
@@ -36,20 +42,16 @@ const axiosResult = (result:Promise<AxiosResponse<any, any>>, callback:Function,
 
 const chatCore = {
     axios : (requestKind:("put"|"delete"|"post"),url:string,param:any,callback:Function, error?:Function) =>{
-        if(url != "/login" && window.sessionStorage.getItem("sessionYn") != "Y"){
-            event?.preventDefault();
-            alert("세션이 없습니다. 로그인 후 이용해주세요");
+        if(checkRequest(url)){
             return false;
         }
-        axiosResult(axios[requestKind](url,JSON.stringify(param)),callback,error);
+        axiosResult(axios[requestKind](url,JSON.stringify(param),headers),callback,error);
     },
     asyncAxios : async(requestKind:("put"|"delete"|"post"),url:string,param:any,callback:Function, error?:Function)=>{
-        if(url != "/login" && window.sessionStorage.getItem("sessionYn") != "Y"){
-            event?.preventDefault();
-            alert("세션이 없습니다. 로그인 후 이용해주세요");
+        if(checkRequest(url)){
             return false;
         }
-        await axiosResult(axios[requestKind](url,JSON.stringify(param)),callback,error);
+        await axiosResult(axios[requestKind](url,JSON.stringify(param),headers),callback,error);
     },
 }
 
