@@ -42,8 +42,6 @@ const ChatPhone = () => {
     }
   };
 
-
-
   const axiosConnection = (event: KeyboardEvent<HTMLInputElement>)=>{
     let target = event.currentTarget;
 
@@ -58,11 +56,11 @@ const ChatPhone = () => {
     }
     progressCk(true); 
     chatCore.axios("put","/hello133333", { userAsw: target.value },(result: responseChat) => {
-        if (result) {
+        if (result.data) { 
           setChatList([...chatList, result.data]);
           target.value = "";
-          progressCk(false);
         }
+        progressCk(false);
       },(error: responseChat) => {
         if (error) {
           alert("chat과의 통신에 실패했습니다.");
@@ -70,6 +68,7 @@ const ChatPhone = () => {
         }
       }
     );
+    
   };
 
   return (
@@ -91,8 +90,10 @@ const ChatPhone = () => {
           {chatList.map((item, indx) => {
             return (
               <div key={indx}>
+                <span style={{position: "relative",left: "348px",bottom:"-4px"}}>여행자</span>
                 <div className="user-bubble">{item.userAsw}</div>
                 <div className="chatBot-bubble">{item.chatAsw}</div>
+                <span style={{position: "relative",bottom:"34px",right:"258px"}}>로봇</span>
               </div>
             );
           })}

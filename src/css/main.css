@@ -121,13 +121,13 @@ html {
    }
    .buttonDiv{
     text-align: center;
-    padding-top : 30px;
+    padding-top : 10px;
    }
    .chatForm {
     padding-left: 60px;
     padding-right: 60px;
     overflow: auto;
-    height: 367px;
+    height: 429px;
    }
    .chatForm::-webkit-scrollbar {
     width: 10px;
@@ -147,7 +147,7 @@ html {
    .chatBot-bubble {
     background: #e5e52a;
     border-radius: .5em;
-    margin-top:10px;
+    margin-top:26px;
     padding: 10px;
     width: 60%;
     display: inline-block;
@@ -164,10 +164,11 @@ html {
 	margin-top: -0.656em;
 	margin-left: -1.312em;
   }
+
   .user-bubble {
     background: #00bd5b;
     border-radius: .5em;
-    margin-top: 10px;
+    margin-top: 30px;
     padding : 10px;
     float: right;
     width: 60%;
@@ -185,4 +186,3 @@ html {
     margin-top: -0.656em;
     margin-right: -1.312em;
   }
-  

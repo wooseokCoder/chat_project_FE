@@ -17,16 +17,13 @@ axios.defaults.headers.put = {
 axios.defaults.headers.delete = { 
     "Content-Type": "application/json"
 };
+axios.defaults.validateStatus= (status) => {
+    return status == 200;
+} 
 
 const axiosResult = (result:Promise<AxiosResponse<any, any>>, callback:Function, error?:Function)=>{
     result.then((response: AxiosResponse<any, any>) => {
-        if(response.status == 200){
             callback({resultCode : response.status,data:response.data})
-        }else if(error){
-            error(response);
-        }else{
-            alert("axios 통신에 실패하였습니다");
-        }
     })
     .catch((err) =>{
         if(err && error){
