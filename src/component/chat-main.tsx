@@ -4,6 +4,7 @@
 import chatCore, { responseProps } from "@/core/chat-core";
 import "../css/main.css";
 import ChatPhone from "./chat-phone";
+import {alert} from "../core/alert"
 
 const ChatMain = () =>{
   

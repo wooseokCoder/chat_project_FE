@@ -6,6 +6,10 @@ html {
     overflow: hidden;
   }
   
+body {
+  padding-right: 0px !important;
+  overflow: visible !important;
+}
 .card {
     width: 40%;
     height: 700px;

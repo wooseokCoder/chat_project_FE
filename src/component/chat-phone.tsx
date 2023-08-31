@@ -93,7 +93,7 @@ const ChatPhone = () => {
                 <span style={{position: "relative",left: "348px",bottom:"-4px"}}>여행자</span>
                 <div className="user-bubble">{item.userAsw}</div>
                 <div className="chatBot-bubble">{item.chatAsw}</div>
-                <span style={{position: "relative",bottom:"34px",right:"258px"}}>로봇</span>
+                <span style={{position: "relative",bottom:"35px",right:"255px"}}>Chat</span>
               </div>
             );
           })}
