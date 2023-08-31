@@ -57,7 +57,7 @@ const ChatPhone = () => {
       return false;
     }
     progressCk(true); 
-    chatCore.putAxios("/hello133333", { userAsw: target.value },(result: responseChat) => {
+    chatCore.axios("put","/hello133333", { userAsw: target.value },(result: responseChat) => {
         if (result) {
           setChatList([...chatList, result.data]);
           target.value = "";
@@ -73,18 +73,7 @@ const ChatPhone = () => {
   };
 
   return (
-    <div className="card">
-      <div className="tools">
-        <div className="circle">
-          <span className="red box"></span>
-        </div>
-        <div className="circle">
-          <span className="yellow box"></span>
-        </div>
-        <div className="circle">
-          <span className="green box"></span>
-        </div>
-      </div>
+
       <div className="card__content">
         <div className="buttonDiv">
           <button> 음식 </button>
@@ -122,8 +111,6 @@ const ChatPhone = () => {
           placeholder="Type here..."
         />
       </div>
-      
-    </div>
   );
 };
 
