@@ -61,13 +61,7 @@ const ChatPhone = () => {
           target.value = "";
         }
         progressCk(false);
-      },(error: responseChat) => {
-        if (error) {
-          alert("chat과의 통신에 실패했습니다.");
-          progressCk(false);
-        }
-      }
-    );
+      });
     
   };
 
