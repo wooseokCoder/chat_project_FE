@@ -64,9 +64,11 @@ const ChatMain = () =>{
             </div>
             <ChatPhone></ChatPhone>
             </div>
-            <button ref={loginButton} onClick={() =>login()}>로그인</button>
-            <input ref={userId} type="text"></input>
-            <button ref={logoutButton} style={{display:"none"}}onClick={() =>logout()}>로그아웃</button>
+            <div>
+              <button ref={loginButton} onClick={() =>login()}>로그인</button>
+              <input ref={userId} type="text"></input>
+              <button ref={logoutButton} style={{display:"none"}}onClick={() =>logout()}>로그아웃</button>
+            </div>
             </div>
         </div>
     )
