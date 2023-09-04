@@ -1,10 +1,15 @@
 import axios, { AxiosHeaders, AxiosResponse } from "axios";
 import {alert} from "./alert";
+import { MutableRefObject } from "react";
+
 export interface responseProps {
     resultCode : string,
     data? : any
 }
 
+interface HTMLValueElement extends HTMLElement{
+    value : string
+}
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://localhost:8080";
@@ -51,6 +56,18 @@ const chatCore = {
         headers.headers.csrfToken = window.sessionStorage.getItem("csrfToken")||"";
         await axiosResult(axios[requestKind](url,JSON.stringify(param),headers),callback,error);
     },
+    visible : (el:MutableRefObject<any>, visibleYn:boolean) =>{
+        if(el && el.current){
+            el.current.style.display = (visibleYn ? "" : "none");
+        }
+    },
+    setValue : (el:MutableRefObject<any> | HTMLValueElement, str:string) =>{
+        if(el && !("value" in el) && el.current && el.current.tagName){
+            el.current.value = str;
+        }else if(el && "value" in el){
+            el.value = str;
+        }
+    }
 }
 
 export default chatCore;

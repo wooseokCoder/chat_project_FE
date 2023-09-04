@@ -20,10 +20,10 @@ const ChatMain = () =>{
               window.sessionStorage.setItem("sessionYn",result.data.pageSession);
               alert("로그인에 성공했습니다.");
               if(userId.current &&  loginButton.current && logoutButton.current){
-                userId.current.style.display = "none";
-                userId.current.value = "";
-                loginButton.current.style.display = "none";
-                logoutButton.current.style.display = "";
+                chatCore.visible(userId,false);
+                chatCore.visible(loginButton,false);
+                chatCore.visible(logoutButton,true);
+                chatCore.setValue(userId,"");
               }
             }else{
               alert("이미 로그인이 되어있습니다.")
@@ -40,9 +40,9 @@ const ChatMain = () =>{
             window.sessionStorage.setItem("sessionYn","");
             alert("로그아웃에 성공했습니다.");
             if(userId.current &&  loginButton.current && logoutButton.current){
-              userId.current && (userId.current.style.display = "");
-              loginButton.current.style.display = "";
-              logoutButton.current.style.display = "none";
+              chatCore.visible(userId,true);
+              chatCore.visible(loginButton,true);
+              chatCore.visible(logoutButton,false);
             }
           }
         })

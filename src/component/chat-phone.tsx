@@ -36,12 +36,6 @@ const ChatPhone = () => {
     messageBoxBottomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const progressCk = (ck: boolean) => {
-    if (progress.current) {
-      progress.current.style.display = ck ? "" : "none";
-    }
-  };
-
   const axiosConnection = (event: KeyboardEvent<HTMLInputElement>)=>{
     let target = event.currentTarget;
 
@@ -54,13 +48,13 @@ const ChatPhone = () => {
       alert("질문을 입력해주세요");
       return false;
     }
-    progressCk(true); 
+    chatCore.visible(progress,true);
     chatCore.axios("put","/hello133333", { userAsw: target.value },(result: responseChat) => {
         if (result.data) { 
           setChatList([...chatList, result.data]);
-          target.value = "";
+          chatCore.setValue(target,"");
         }
-        progressCk(false);
+        chatCore.visible(progress,false);
       });
     
   };
