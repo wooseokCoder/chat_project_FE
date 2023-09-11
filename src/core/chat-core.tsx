@@ -1,6 +1,7 @@
 import axios, { AxiosHeaders, AxiosResponse } from "axios";
 import {alert} from "./alert";
-import { MutableRefObject } from "react";
+import { MutableRefObject} from "react";
+import { Type } from "typescript";
 
 export interface responseProps {
     resultCode : string,
@@ -8,7 +9,8 @@ export interface responseProps {
 }
 
 interface HTMLValueElement extends HTMLElement{
-    value : string
+    value? : string,
+    current? : HTMLValueElement
 }
 
 axios.defaults.withCredentials = true;
@@ -24,9 +26,9 @@ const headers = {
 }
 
 
-const axiosResult = (result:Promise<AxiosResponse<any, any>>, callback:Function, error?:Function)=>{
+const axiosResult = (result:Promise<AxiosResponse<Type, Type>>, callback:Function, error?:Function)=>{
 
-    result.then((response: AxiosResponse<any, any>) => {
+    result.then((response: AxiosResponse<Type, Type>) => {
         if(response.headers instanceof AxiosHeaders && response.headers.has('csrftoken')){
             window.sessionStorage.setItem("csrfToken",response.headers['csrftoken']);
         }
@@ -56,13 +58,16 @@ const chatCore = {
         headers.headers.csrfToken = window.sessionStorage.getItem("csrfToken")||"";
         await axiosResult(axios[requestKind](url,JSON.stringify(param),headers),callback,error);
     },
-    visible : (el:MutableRefObject<any>, visibleYn:boolean) =>{
-        if(el && el.current){
+    visible : (el:MutableRefObject<HTMLValueElement|null>, visibleYn?:boolean):boolean|void => {
+        if(el && el.current && visibleYn != undefined){
             el.current.style.display = (visibleYn ? "" : "none");
         }
+        else if(el && el.current && visibleYn == undefined){
+            return el.current.style.display != "none";
+        }
     },
-    setValue : (el:MutableRefObject<any> | HTMLValueElement, str:string) =>{
-        if(el && !("value" in el) && el.current && el.current.tagName){
+    setValue : (el:MutableRefObject<HTMLValueElement|null> | HTMLValueElement, str:string) =>{
+        if(el && "current" in el && el.current && el.current.tagName){
             el.current.value = str;
         }else if(el && "value" in el){
             el.value = str;

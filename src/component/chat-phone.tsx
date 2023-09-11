@@ -56,11 +56,9 @@ const ChatPhone = () => {
         }
         chatCore.visible(progress,false);
       });
-    
   };
 
   return (
-
       <div className="card__content">
         <div className="buttonDiv">
           <button> 음식 </button>
@@ -90,15 +88,8 @@ const ChatPhone = () => {
         <div ref={progress} style={{ display: "none" }}>
           <ChatLoading ldPosition={loadingPosition}></ChatLoading>
         </div>
-        <input
-          onKeyDown={(Event) => {
-            axiosConnection(Event);
-          }}
-          type="text"
-          name="text"
-          className="input"
-          placeholder="Type here..."
-        />
+        <input onKeyDown={(Event) => {axiosConnection(Event)}} type="text" name="text" className="input"
+         placeholder="Type here..."/>
       </div>
   );
 };
